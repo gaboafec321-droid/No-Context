@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Context - Crochet y Amigurumis</title>
+    
+    <!-- FAVICON -->
+    <link class="rounded-full" rel="icon" type="image/jpeg" href="logo.jpg">
+    
+    <!-- Tailwind CSS v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: url('fondo.jpeg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .font-brand {
+            font-family: 'Fredoka', sans-serif;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-purple-950 antialiased selection:bg-[#B99AE1]/40">
+
+    <!-- 1. NAVBAR -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/20 border-b border-white/20 shadow-xs">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="font-brand text-2xl font-bold text-purple-900 tracking-wide flex items-center gap-3">
+                <img src="logo.jpg" alt="Logo No Context" class="w-10 h-10 rounded-full object-cover border border-white/40 shadow-xs">
+                <span>No Context</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-purple-950/80">
+                <a href="#hero" class="hover:text-purple-900 transition-colors">Inicio</a>
+                <a href="#catalogo" class="hover:text-purple-900 transition-colors">Catálogo</a>
+            </nav>
+            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20un%20pedido%20personalizado%20en%20crochet" target="_blank" class="bg-[#845CBC] hover:bg-[#714fa3] text-white font-semibold px-5 py-2.5 rounded-full shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 text-sm">
+                Pedir Personalizado
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="hero" class="max-w-7xl mx-auto px-6 pt-12 pb-20 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+            <span class="inline-block bg-white/30 backdrop-blur-xs text-purple-950 font-semibold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider border border-white/20">
+                ✨ Hecho 100% a mano
+            </span>
+            <h1 class="font-brand text-4xl sm:text-5xl lg:text-6xl text-purple-950 leading-[1.15]">
+                Creaciones de crochet que abrazan tu <span class="text-purple-900 drop-shadow-xs">corazón</span>
+            </h1>
+            <p class="text-purple-950/80 text-lg max-w-md leading-relaxed">
+                Diseños únicos tejidos punto a punto con hilos de la mejor calidad. El regalo perfecto para alguien especial o para consentirte.
+            </p>
+            <div class="pt-4 flex flex-wrap gap-4">
+                <a href="#catalogo" class="bg-purple-950 hover:bg-purple-900 text-white font-semibold px-8 py-3.5 rounded-full shadow-xs transition-all duration-300 text-center w-full sm:w-auto">
+                    Ver Catálogo
+                </a>
+            </div>
+        </div>
+        <div class="flex justify-center items-center relative order-first md:order-last">
+            <img src="ramoharyypotter.jpg" 
+                 alt="Ramo temático Harry Potter" 
+                 class="w-full max-w-sm rounded-3xl shadow-xl border-4 border-white/60 animate-float object-cover aspect-square">
+        </div>
+    </section>
+
+    <!-- 3. CATÁLOGO INTERACTIVO -->
+    <section id="catalogo" class="bg-white/15 backdrop-blur-md py-20 border-y border-white/10" x-data="{ categoria: 'todos' }">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="font-brand text-3xl sm:text-4xl text-purple-950 mb-4">Adopta a tu nuevo compañero</h2>
+                <p class="text-purple-950/80">Explora nuestras colecciones listas para enviar o inspírate para un pedido completamente personalizado.</p>
+                
+                <!-- Filtros por Categorías -->
+                <div class="flex justify-center gap-2 mt-8 flex-wrap">
+                    <button @click="categoria = 'todos'" :class="categoria === 'todos' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Todos</button>
+                    <button @click="categoria = 'amigurumis'" :class="categoria === 'amigurumis' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Amigurumis</button>
+                    <button @click="categoria = 'llaveros'" :class="categoria === 'llaveros' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Llaveros</button>
+                    <button @click="categoria = 'decoracion'" :class="categoria === 'decoracion' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Decoración</button>
+                    <button @click="categoria = 'peluches'" :class="categoria === 'peluches' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Peluches</button>
+                    <button @click="categoria = 'flores'" :class="categoria === 'flores' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Flores</button>
+                </div>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- ================= APARTADO AMIGURUMIS ================= -->
+                <!-- 1. Amigurumi personalizado -->
+                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="amigurumi.jpg" alt="Amigurumi personalizado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Amigurumi personalizado</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Hacemos realidad cualquier design o personaje que tengas en mente.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20un%20Amigurumi%20personalizado" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Batman -->
+                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="batman.jpg" alt="Batman" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Batman</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">El caballero de la noche tejido a mano con excelentes acabados y detalles.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Batman" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Castor de San Valentín -->
+                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="castor.jpg" alt="Castor de san valentin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Castor de San Valentín</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Un tierno detalle abrazando un corazón, perfecto para regalar amor.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Castor%20de%20San%20Valentin" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Geto y Gojo -->
+                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="getoygojo.jpg" alt="Geto y Gojo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Geto y Gojo</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Dúo icónico coleccionable con vestimenta fiel y lentes característicos.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20set%20de%20Geto%20y%20Gojo" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Robie y Demogorgon -->
+                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="robieydemogorgon.jpg" alt="Robie y Demogorgon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Robie y Demogorgon</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Increíble nivel de detalle en el uniforme marinero y los pétalos del Demogorgon.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20set%20de%20Robie%20y%20Demogorgon" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ================= APARTADO LLAVEROS ================= -->
+                <!-- 1. Inozke y Tengen -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="inozkellavera.jpeg" alt="Llaveros Inozke y Tengen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Inozke y Tengen</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Dúo dinámico de cazadores de Demon Slayer tejidos con capuchas e increíbles expresiones faciales.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Inozke%20y%20Tengen" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Furia Nocturna y Furia Luminosa -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="llaverofurianoctura.jpeg" alt="Llaveros Furia Nocturna y Furia Luminosa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Furia Nocturna y Furia Luminosa</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Pareja de dragones inspirados en Cómo Entrenar a tu Dragón con tiernos y grandes ojos brillantes.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Furia%20Nocturna%20y%20Furia%20Luminosa" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Naruto -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="llaveronaruto.jpeg" alt="Llavero Naruto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Naruto</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">El ninja de la Aldea de la Hoja con su icónico traje naranja, cabello puntiagudo y banda de regulación.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Naruto" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Pochita -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="llaveropochita.jpeg" alt="Llavero Pochita" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Pochita</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">El adorable demonio motosierra de Chainsaw Man, en un llamativo color naranja y con asa de sujeción.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Pochita" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Pucca y Garu -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="llaveropuccaygaru.jpeg" alt="Llaveros Pucca y Garu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Pucca y Garu</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">La inolvidable pareja animada tejida en hilo, completa con el característico corazón rojo de Garu.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Pucca%20y%20Garu" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ================= APARTADO PELUCHES ================= -->
+                <!-- 1. Abeja de Minecraft -->
+                <div x-show="categoria === 'todos' || categoria === 'peluches'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="abeja_2.jpeg" alt="Abeja de Minecraft" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-pink-600 tracking-wide uppercase">Peluches</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Abeja de Minecraft</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Hermosa y esponjosa abeja de textura supersuave, con un llamativo diseño cúbico fiel al videojuego.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Peluche%20de%20Abeja%20de%20Minecraft" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Lamie -->
+                <div x-show="categoria === 'todos' || categoria === 'peluches'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="lamiepeluche_2.jpeg" alt="Lamie" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-pink-600 tracking-wide uppercase">Peluches</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Lamie</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Tierna ovejita confeccionada con hilo rizado de alta calidad, vestida con un delicado traje rosa.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Peluche%20de%20Lamie" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Spider-Man -->
+                <div x-show="categoria === 'todos' || categoria === 'peluches'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="spidermnapeluche_2.jpeg" alt="Spider-Man" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-pink-600 tracking-wide uppercase">Peluches</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Spider-Man</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">El icónico superhéroe arácnido tejido en una versión abrazable con llamativos detalles en felpa blanda.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Peluche%20de%20Spider-Man" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ================= APARTADO FLORES ================= -->
+                <!-- 1. Flores + Amigurumi -->
+                <div x-show="categoria === 'todos' || categoria === 'flores'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="flores.jpg" alt="Flores + Amigurumi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-purple-600 tracking-wide uppercase">Flores</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Flores + Amigurumi</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">La combinación perfecta: un ramo de tulipanes acompañado de una hermosa muñeca tejida.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Ramo%20de%20Flores%20%2B%20Amigurumi" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Maceta de Rapunzel -->
+                <div x-show="categoria === 'todos' || categoria === 'flores'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="macetarapunzel.jpeg" alt="Maceta de Rapunzel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-purple-600 tracking-wide uppercase">Flores / Decoración</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Maceta de Rapunzel</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Inspirada en la flor dorada de Enredados, incluye al tierno camaleón Pascal en su base.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20la%20Maceta%20de%20Rapunzel" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Ramo 6 Flores -->
+                <div x-show="categoria === 'todos' || categoria === 'flores'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="ramo6flores.jpeg" alt="Ramo 6 Flores" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-purple-600 tracking-wide uppercase">Flores</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Ramo 6 Flores</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Un precioso y brillante ramo tejido con cinco tulipanes amarillos y un gran girasol central.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Ramo%20de%206%20Flores" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Ramo temático Army -->
+                <div x-show="categoria === 'todos' || categoria === 'flores'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="ramoarmy.jpg" alt="Ramo temático Army" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-purple-600 tracking-wide uppercase">Flores</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Ramo temático Army</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Especial para fans de BTS, decorado con margaritas, tulipanes morados y los personajes Tata y Koya.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Ramo%20tematico%20Army" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Ramo temático Harry Potter -->
+                <div x-show="categoria === 'todos' || categoria === 'flores'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="ramoharyypotter.jpg" alt="Ramo temático Harry Potter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-purple-600 tracking-wide uppercase">Flores</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Ramo temático Harry Potter</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Mágico diseño que incluye a Harry con su bufanda de Gryffindor, rosas rojas y una Snitch dorada.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Ramo%20tematico%20Harry%20Potter" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FOOTER -->
+    <footer class="bg-purple-950/90 backdrop-blur-md text-purple-200 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <img src="logo.jpg" alt="Logo No Context" class="w-12 h-12 rounded-full object-cover border border-white/20">
+                <div>
+                    <span class="font-brand text-xl font-bold text-white tracking-wide block mb-1">No Context</span>
+                    <p class="text-sm text-purple-300">Haciendo el mundo un poquito más suave, un punto a la vez.</p>
+                </div>
+            </div>
+            
+            <!-- Redes Sociales Rediseñadas -->
+            <div class="flex flex-wrap gap-4 justify-center">
+                <!-- Botón de Instagram -->
+                <a href="https://www.instagram.com/nocontext.crochet?igsh=MWt3cGR4ZGV5ZjgxZg==" 
+                   target="_blank" 
+                   class="inline-flex items-center gap-2 font-semibold text-white px-5 py-2 rounded-full shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+
+                <!-- Botón de WhatsApp -->
+                <a href="https://wa.me/584247296036" 
+                   target="_blank" 
+                   class="inline-flex items-center gap-2 font-semibold text-white px-5 py-2 rounded-full shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg bg-[#25D366] hover:bg-[#20ba5a]">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.832.002-2.623-1.023-5.09-2.885-6.951-1.862-1.863-4.334-2.888-6.962-2.889-5.437 0-9.862 4.414-9.866 9.833-.001 1.748.461 3.454 1.337 4.97l-.983 3.587 3.671-.962zm13.177-7.185c-.302-.151-1.791-.883-2.073-.985-.282-.103-.487-.152-.692.152-.204.304-.793.985-.972 1.188-.179.204-.359.228-.661.077-.302-.151-1.274-.469-2.426-1.496-.896-.798-1.501-1.784-1.678-2.088-.178-.303-.019-.467.132-.617.136-.134.302-.354.453-.531.151-.177.201-.253.302-.456.101-.202.051-.379-.025-.531-.076-.152-.692-1.671-.947-2.284-.249-.599-.503-.517-.692-.527-.179-.008-.385-.01-.591-.01-.206 0-.54.077-.822.38-.282.304-1.079 1.053-1.079 2.567s1.104 2.977 1.258 3.179c.154.204 2.173 3.32 5.267 4.654.736.317 1.31.507 1.758.649.74.234 1.413.201 1.945.122.593-.088 1.791-.733 2.048-1.417.257-.685.257-1.267.18-1.392-.077-.126-.282-.203-.585-.354z"/>
+                    </svg>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
