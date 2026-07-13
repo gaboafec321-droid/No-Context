@@ -84,20 +84,41 @@
     </section>
 
     <!-- 3. CATÁLOGO INTERACTIVO -->
-    <section id="catalogo" class="bg-white/15 backdrop-blur-md py-20 border-y border-white/10" x-data="{ categoria: 'todos' }">
+    <section id="catalogo" class="bg-white/15 backdrop-blur-md py-20 border-y border-white/10" x-data="{ categoria: 'todos', subcategoria: 'todos' }">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <h2 class="font-brand text-3xl sm:text-4xl text-purple-950 mb-4">Adopta a tu nuevo compañero</h2>
                 <p class="text-purple-950/80">Explora nuestras colecciones listas para enviar o inspírate para un pedido completamente personalizado.</p>
                 
                 <!-- Filtros por Categorías -->
-                <div class="flex justify-center gap-2 mt-8 flex-wrap">
-                    <button @click="categoria = 'todos'" :class="categoria === 'todos' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Todos</button>
-                    <button @click="categoria = 'amigurumis'" :class="categoria === 'amigurumis' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Amigurumis</button>
-                    <button @click="categoria = 'llaveros'" :class="indigo === 'llaveros' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Llaveros</button>
-                    <button @click="categoria = 'decoracion'" :class="categoria === 'decoracion' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Decoración</button>
-                    <button @click="categoria = 'peluches'" :class="categoria === 'peluches' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Peluches</button>
-                    <button @click="categoria = 'flores'" :class="categoria === 'flores' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Flores</button>
+                <div class="flex flex-col items-center gap-4 mt-8">
+                    <!-- Fila Principal de Categorías -->
+                    <div class="flex justify-center gap-2 flex-wrap">
+                        <button @click="categoria = 'todos'; subcategoria = 'todos'" :class="categoria === 'todos' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Todos</button>
+                        
+                        <!-- Botón de Amigurumis -->
+                        <button @click="categoria = 'amigurumis'; subcategoria = 'todos'" :class="categoria === 'amigurumis' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs flex items-center gap-1">
+                            Amigurumis
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-300" :class="categoria === 'amigurumis' ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        
+                        <button @click="categoria = 'llaveros'; subcategoria = 'todos'" :class="categoria === 'llaveros' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Llaveros</button>
+                        <button @click="categoria = 'decoracion'; subcategoria = 'todos'" :class="categoria === 'decoracion' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Decoración</button>
+                        <button @click="categoria = 'peluches'; subcategoria = 'todos'" :class="categoria === 'peluches' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Peluches</button>
+                        <button @click="categoria = 'flores'; subcategoria = 'todos'" :class="categoria === 'flores' ? 'bg-[#845CBC] text-white shadow-xs' : 'bg-white/40 text-purple-950 hover:bg-white/60'" class="px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer backdrop-blur-xs">Flores</button>
+                    </div>
+
+                    <!-- Subcategorías de Amigurumis (Se muestran solo si 'amigurumis' está activo) -->
+                    <div x-show="categoria === 'amigurumis'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" class="flex justify-center gap-2 flex-wrap bg-white/20 p-2 rounded-2xl border border-white/10 backdrop-blur-xs">
+                        <button @click="subcategoria = 'todos'" :class="subcategoria === 'todos' ? 'bg-purple-950 text-white' : 'bg-white/60 text-purple-950 hover:bg-white/80'" class="px-3.5 py-1.5 rounded-full font-medium text-xs transition-all duration-300 cursor-pointer">
+                            Todos
+                        </button>
+                        <button @click="subcategoria = 'religiosos'" :class="subcategoria === 'religiosos' ? 'bg-purple-950 text-white' : 'bg-white/60 text-purple-950 hover:bg-white/80'" class="px-3.5 py-1.5 rounded-full font-medium text-xs transition-all duration-300 cursor-pointer">
+                            Amigurumis Religiosos
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -106,7 +127,7 @@
                 
                 <!-- ================= APARTADO AMIGURUMIS ================= -->
                 <!-- 1. Amigurumi personalizado -->
-                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && subcategoria === 'todos')" x-transition.duration.300ms
                      class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                     <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
                         <img src="amigurumi.jpg" alt="Amigurumi personalizado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -125,7 +146,7 @@
                 </div>
 
                 <!-- 2. Batman -->
-                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && subcategoria === 'todos')" x-transition.duration.300ms
                      class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                     <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
                         <img src="batman.jpg" alt="Batman" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -144,7 +165,7 @@
                 </div>
 
                 <!-- 3. Castor de San Valentín -->
-                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && subcategoria === 'todos')" x-transition.duration.300ms
                      class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                     <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
                         <img src="castor.jpg" alt="Castor de san valentin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -163,7 +184,7 @@
                 </div>
 
                 <!-- 4. Geto y Gojo -->
-                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && subcategoria === 'todos')" x-transition.duration.300ms
                      class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                     <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
                         <img src="getoygojo.jpg" alt="Geto y Gojo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -182,7 +203,7 @@
                 </div>
 
                 <!-- 5. Robie y Demogorgon -->
-                <div x-show="categoria === 'todos' || categoria === 'amigurumis'" x-transition.duration.300ms
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && subcategoria === 'todos')" x-transition.duration.300ms
                      class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                     <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
                         <img src="robieydemogorgon.jpg" alt="Robie y Demogorgon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -194,6 +215,179 @@
                         <div class="mt-4 flex items-center justify-between">
                             <span class="font-bold text-purple-950 text-lg">Consultar</span>
                             <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20set%20de%20Robie%20y%20Demogorgon" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IMÁGENES NUEVAS - CATEGORÍA AMIGURUMIS / SUBCATEGORÍA RELIGIOSOS -->
+                
+                <!-- 8. Angel -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="angel.jpeg" alt="Angel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Ángel</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Hermoso angelito tejido con alas detalladas y aureola brillante, ideal para ocasiones especiales.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Angel" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Virgen de Guadalupe -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="guadalupe.jpeg" alt="Virgen de Guadalupe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Virgen de Guadalupe</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Diseño tierno y colorido de la Guadalupana con su característico manto detallado.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Virgen%20de%20Guadalupe" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Virgen la inmaculada Concepción -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="inmaculadaconcepcion.jpeg" alt="Virgen la inmaculada Concepción" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Virgen de la Inmaculada Concepción</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Tejido impecable en tonos blanco y azul con sutiles acabados dorados.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Virgen%20la%20inmaculada%20Concepcion" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Jesucristo -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="jesucristo.jpeg" alt="Jesucristo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Jesucristo</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Representación adorable y respetuosa de Jesús tejida totalmente a mano.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Jesucristo" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Santo José Gregorio Hernández -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="josehernandez.jpeg" alt="Santo José Gregorio Hernández" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Santo José Gregorio Hernández</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">El médico de los pobres con su característica bata blanca, sombrero y aureola.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Amigurumi%20de%20Santo%20Jose%20Gregorio%20Hernandez" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Pesebre 6 personajes (completo) -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="pesebrecompleto.jpeg" alt="Pesebre 6 personajes (completo)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Pesebre completo (6 personajes)</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Set navideño completo tejido con hilos de calidad para decorar tu hogar con tradición.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Pesebre%206%20personajes%20(completo)" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. Pesebre pequeño 3 personajes -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="pesebrepequeño.jpeg" alt="Pesebre pequeño 3 personajes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Pesebre pequeño (3 personajes)</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">La sagrada familia en una versión compacta y llena de ternura.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20Pesebre%20pequeno%203%20personajes" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Santa Rita (grande) -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="santarita.jpeg" alt="Santa Rita (grande)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Santa Rita (Grande)</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Imponente pieza con gran nivel de detalle en sus hábitos, rosas y crucifijo.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20Santa%20Rita%20(grande)" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16. Virgen del Carmen -->
+                <div x-show="categoria === 'todos' || (categoria === 'amigurumis' && (subcategoria === 'todos' || subcategoria === 'religiosos'))" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="virgendelcarmen.jpeg" alt="Virgen del Carmen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-[#845CBC] tracking-wide uppercase">Amigurumis / Religiosos</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Virgen del Carmen</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Hermosa representación de la Virgen cargando al niño Jesús con corona y escapularios solemnes.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20la%20Virgen%20del%20Carmen" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
                                 Consultar ➔
                             </a>
                         </div>
@@ -291,6 +485,63 @@
                         <div class="mt-4 flex items-center justify-between">
                             <span class="font-bold text-purple-950 text-lg">Consultar</span>
                             <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Pucca%20y%20Garu" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Jesucristo Llavero (NUEVO) -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="jesusllavero.jpeg" alt="Jesucristo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Jesucristo</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Tierno llavero miniatura de Jesús, tejido delicadamente con su túnica y un característico manto rojo.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Jesucristo" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Santa Rita Llavero (NUEVO) -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="santaritallavero.jpeg" alt="Santa Rita" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Santa Rita</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Hermosa versión en miniatura de Santa Rita con sus detalles de rosas rojas, crucifijo y aureola tejida.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20Santa%20Rita" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
+                                Consultar ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Virgen de Guadalupe y virgen de Fátima (NUEVO) -->
+                <div x-show="categoria === 'todos' || categoria === 'llaveros'" x-transition.duration.300ms
+                     class="group bg-white/80 backdrop-blur-xs rounded-2xl p-4 border border-white/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                    <div class="overflow-hidden rounded-xl bg-stone-100 aspect-square mb-4">
+                        <img src="virguenesllavero.jpeg" alt="Virgen de Guadalupe y virgen de Fátima por" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-2">
+                        <span class="text-xs font-semibold text-indigo-600 tracking-wide uppercase">Llaveros</span>
+                        <h3 class="font-brand text-lg text-purple-950 mt-1">Virgen de Guadalupe y virgen de Fátima</h3>
+                        <p class="text-sm text-purple-950/70 mt-1">Par de llaveros religiosos súper tiernos con detalles de coronas y mantos en colores vibrantes.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="font-bold text-purple-950 text-lg">Consultar</span>
+                            <a href="https://wa.me/584247296036?text=Hola!%20Me%20interesa%20el%20llavero%20de%20la%20Virgen%20de%20Guadalupe%20y%20Virgen%20de%20Fatima" target="_blank" class="text-[#845CBC] hover:text-[#714fa3] font-semibold text-sm flex items-center gap-1">
                                 Consultar ➔
                             </a>
                         </div>
